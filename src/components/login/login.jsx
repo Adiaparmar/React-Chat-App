@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify"
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../lib/firebase";
+import { auth , db} from "../../lib/firebase";
 
 
 const Login = () => {
@@ -25,7 +25,7 @@ const Login = () => {
     }
     const handleRegister = async(e) => {
         e.preventDefault()
-        const formData = new FormData()
+        const formData = new FormData(e.target)
 
         const {username, email, password} = Object.fromEntries(formData);
 
