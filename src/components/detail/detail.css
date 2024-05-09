@@ -2,7 +2,7 @@
     flex: 1;
 
     .user{
-        padding: 30px 20px;
+        padding: 20px 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -10,8 +10,8 @@
         border-bottom: 1px solid #dddddd35;
 
         img{
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -21,7 +21,7 @@
         padding: 20px;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 20px;
 
         .option{
 
@@ -84,7 +84,7 @@
         }
 
         button{
-            padding: 15px;
+            padding: 13px;
             background-color: rgba(230, 74, 105, 0.553);
             color: white;
             border-radius: 5px;
@@ -98,6 +98,7 @@
             &.logout{
                 padding: 10px;
                 background-color: #1a73e8;
+                cursor: pointer;
             }
         }
 
