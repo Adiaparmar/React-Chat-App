@@ -1,29 +1,41 @@
-import { arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore"
+import "./addUser.css";
 import { db } from "../../../../lib/firebase";
-import "./addUser.css"
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useState } from "react";
-import { useUserStore } from "../../../../lib/UserStore";
+import { useUserStore } from "../../../../lib/userStore";
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
 
-  const {currentUser} = useUserStore();
+  const { currentUser } = useUserStore();
 
   const handleSearch = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData(e.target);
-    const username = formData.get("username")
+    const username = formData.get("username");
 
-    try{
-      const userRef = collection(db,"users");
-      const q = query(userRef, where("username" , "==", username));
+    try {
+      const userRef = collection(db, "users");
 
-      const querySnapshot = await getDocs(q)
+      const q = query(userRef, where("username", "==", username));
 
-      if(!querySnapshot.empty){
-        setUser(querySnapshot.docs[0].data())
+      const querySnapShot = await getDocs(q);
+
+      if (!querySnapShot.empty) {
+        setUser(querySnapShot.docs[0].data());
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   };
@@ -65,18 +77,20 @@ const AddUser = () => {
   return (
     <div className="addUser">
       <form onSubmit={handleSearch}>
-        <input type="text" placeholder="Username" name="username"/>
+        <input type="text" placeholder="Username" name="username" />
         <button>Search</button>
       </form>
-      {user && <div className="user">
-        <div className="detail">
-            <img src={user.avatar || "./avatar.png"} alt=""/>
+      {user && (
+        <div className="user">
+          <div className="detail">
+            <img src={user.avatar || "./avatar.png"} alt="" />
             <span>{user.username}</span>
+          </div>
+          <button onClick={handleAdd}>Add User</button>
         </div>
-        <button onClick={handleAdd}>Add User</button>
-      </div>}
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default AddUser
+export default AddUser;
